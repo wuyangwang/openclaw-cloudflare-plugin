@@ -1,6 +1,6 @@
 {
     "name": "openclaw-cloudflare-plugin",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "Cloudflare wrapper for OpenClaw (KV, Workers, etc.)",
     "author": "tardis",
     "type": "module",
