@@ -1,6 +1,6 @@
 {
     "id": "openclaw-cloudflare-plugin",
-    "name": "Cloudflare Helper",
+    "name": "openclaw-cloudflare-plugin",
     "skills": ["./skills"],
     "configSchema": {
         "type": "object",
