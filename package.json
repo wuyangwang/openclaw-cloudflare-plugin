@@ -28,6 +28,14 @@
         "commander": "^14.0.3",
         "openclaw": "^2026.3.8"
     },
+    "peerDependenciesMeta": {
+        "openclaw": {
+          "optional": true
+        },
+        "commander": {
+          "optional": true
+        }
+    },
     "devDependencies": {
         "@biomejs/biome": "^2.4.6",
         "bumpp": "^10.4.1",

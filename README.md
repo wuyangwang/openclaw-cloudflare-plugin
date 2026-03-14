@@ -34,7 +34,7 @@ https://developers.cloudflare.com/fundamentals/api/get-started/create-token/
 ## Step 1 — Install Plugin
 
 ```bash
-openclaw install openclaw-cloudflare-plugin
+openclaw plugins install openclaw-cloudflare-plugin
 ```
 
 ---
