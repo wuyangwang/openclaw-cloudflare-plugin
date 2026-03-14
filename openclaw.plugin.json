@@ -1,0 +1,19 @@
+{
+    "id": "openclaw-cloudflare-plugin",
+    "name": "Cloudflare Helper",
+    "skills": ["./skills"],
+    "configSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+            "apiToken": {
+                "type": "string",
+                "description": "Cloudflare API token"
+            },
+            "accountId": {
+                "type": "string",
+                "description": "Cloudflare account ID"
+            }
+        }
+    }
+}

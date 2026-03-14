@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "lib": ["ESNext"],
+        "declaration": true,
+        "declarationDir": "./dist",
+        "strict": true,
+        "moduleResolution": "bundler",
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "verbatimModuleSyntax": true,
+        "outDir": "./dist",
+        "rootDir": ".",
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": ["index.ts", "src/**/*", "cli.ts", "tsdown.config.ts"],
+    "exclude": ["node_modules", "dist"]
+}

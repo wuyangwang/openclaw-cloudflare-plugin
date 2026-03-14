@@ -1,0 +1,20 @@
+# Dependencies
+node_modules
+.pnpm-debug.log*
+
+# Build
+dist
+
+# Environment
+.env
+.env.*
+!.env.example
+.npmrc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# OpenClaw / CLI
+.openclaw/
+.gemini/
