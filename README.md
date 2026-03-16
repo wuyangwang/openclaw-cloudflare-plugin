@@ -10,15 +10,26 @@ Cloudflare API wrapper plugin for **OpenClaw**, built on the Cloudflare TypeScri
 
 This plugin allows OpenClaw to interact with your Cloudflare account via chat commands.
 
+> ⚠️ **警告 / Warning**: 删除/添加等敏感操作请谨慎使用，不建议在正式环境使用。
+> Please use sensitive operations like delete/add with caution. It is not recommended for use in production environments.
+
 ## Features (Current)
 
 Currently supported:
 
-* **KV**
-
-  * List KV namespaces
-
-> More features such as D1 and Workers management will be added in the future.
+* **KV (Full CRUD)**
+  * List namespaces, create/delete namespaces
+  * List keys, get/put/delete key-value pairs
+* **D1 (Full CRUD)**
+  * List/create/get/delete databases
+  * Execute raw SQL queries
+* **Workers (Serverless Compute)**
+  * List deployed Workers
+  * Get Worker code
+  * Deploy or update Workers (serverless deployment)
+  * Delete Workers
+* **R2 (Full CRUD)**
+  * List/create/get/delete buckets
 
 ---
 
@@ -80,17 +91,7 @@ And:
 Get top 5 keys in first namespace
 ```
 
-3. OpenClaw will query Cloudflare and return your KV namespaces.
-
----
-
-# Roadmap
-
-Planned features:
-
-* KV CRUD
-* D1 database operations
-* Workers management
+3. OpenClaw will query Cloudflare and return your results.
 
 ---
 

@@ -19,13 +19,26 @@ export function cloudflarePluginConfigSchema(): OpenClawPluginConfigSchema {
             if (!value || typeof value !== 'object' || Array.isArray(value)) {
                 return error('expected config object');
             }
-            // Allow apiToken and other properties defined in jsonSchema
+            const cfg = value as any;
+            if (!cfg.apiToken) {
+                return error('apiToken is required');
+            }
             return { success: true, data: value };
         },
         jsonSchema: {
             type: 'object',
             additionalProperties: false,
-            properties: {},
+            properties: {
+                apiToken: {
+                    type: 'string',
+                    description: 'Cloudflare API Token',
+                },
+                accountId: {
+                    type: 'string',
+                    description: 'Cloudflare Account ID (optional, will be auto-detected if omitted)',
+                },
+            },
+            required: ['apiToken'],
         },
     };
 }
