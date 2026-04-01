@@ -265,6 +265,4 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
         },
         { name: 'cloudflare_kv_delete_key' },
     );
-
-    api.logger.info?.('Cloudflare KV tools registered');
 }

@@ -156,6 +156,4 @@ export function registerCloudflareD1Tools(api: OpenClawPluginApi) {
         },
         { name: 'cloudflare_d1_query_database' },
     );
-
-    api.logger.info?.('Cloudflare D1 tools registered');
 }

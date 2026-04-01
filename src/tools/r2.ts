@@ -128,6 +128,4 @@ export function registerCloudflareR2Tools(api: OpenClawPluginApi) {
         },
         { name: 'cloudflare_r2_delete_bucket' },
     );
-
-    api.logger.info?.('Cloudflare R2 tools registered');
 }

@@ -179,6 +179,4 @@ export function registerCloudflareWorkersTools(api: OpenClawPluginApi) {
         },
         { name: 'cloudflare_workers_delete' },
     );
-
-    api.logger.info?.('Cloudflare Workers tools registered');
 }
