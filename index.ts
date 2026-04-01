@@ -21,15 +21,7 @@ const plugin = {
             ({ program }: any) => {
                 registerCloudflareCli(api, program);
             },
-            {
-                descriptors: [
-                    {
-                        name: 'cloudflare',
-                        description: 'Cloudflare plugin management',
-                        hasSubcommands: true,
-                    },
-                ],
-            },
+            { commands: ['cloudflare'] },
         );
     },
 };
