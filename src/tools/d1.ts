@@ -5,9 +5,15 @@ import { getClientAndAccount, json } from './utils.js';
 // ============ Schemas ============
 
 const ListD1DatabasesSchema = Type.Object({
-    name: Type.Optional(Type.String({ description: 'Filter by database name' })),
-    page: Type.Optional(Type.Number({ description: 'Page number', default: 1 })),
-    per_page: Type.Optional(Type.Number({ description: 'Items per page', default: 10 })),
+    name: Type.Optional(
+        Type.String({ description: 'Filter by database name' }),
+    ),
+    page: Type.Optional(
+        Type.Number({ description: 'Page number', default: 1 }),
+    ),
+    per_page: Type.Optional(
+        Type.Number({ description: 'Items per page', default: 10 }),
+    ),
 });
 
 const CreateD1DatabaseSchema = Type.Object({
@@ -25,7 +31,11 @@ const DeleteD1DatabaseSchema = Type.Object({
 const QueryD1DatabaseSchema = Type.Object({
     database_id: Type.String({ description: 'Cloudflare D1 Database ID' }),
     sql: Type.String({ description: 'The SQL statement to execute' }),
-    params: Type.Optional(Type.Array(Type.Any(), { description: 'Parameters for the SQL statement' })),
+    params: Type.Optional(
+        Type.Array(Type.Any(), {
+            description: 'Parameters for the SQL statement',
+        }),
+    ),
 });
 
 // ============ Tool Registration ============
@@ -40,7 +50,8 @@ export function registerCloudflareD1Tools(api: OpenClawPluginApi) {
             parameters: ListD1DatabasesSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.d1.database.list({
                         account_id: accountId,
                         name: params.name,
@@ -67,7 +78,8 @@ export function registerCloudflareD1Tools(api: OpenClawPluginApi) {
             parameters: CreateD1DatabaseSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.d1.database.create({
                         account_id: accountId,
                         name: params.name,
@@ -92,10 +104,14 @@ export function registerCloudflareD1Tools(api: OpenClawPluginApi) {
             parameters: GetD1DatabaseSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.d1.database.get(params.database_id, {
-                        account_id: accountId,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.d1.database.get(
+                        params.database_id,
+                        {
+                            account_id: accountId,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({
@@ -116,10 +132,14 @@ export function registerCloudflareD1Tools(api: OpenClawPluginApi) {
             parameters: DeleteD1DatabaseSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.d1.database.delete(params.database_id, {
-                        account_id: accountId,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.d1.database.delete(
+                        params.database_id,
+                        {
+                            account_id: accountId,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({
@@ -140,12 +160,16 @@ export function registerCloudflareD1Tools(api: OpenClawPluginApi) {
             parameters: QueryD1DatabaseSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.d1.database.raw(params.database_id, {
-                        account_id: accountId,
-                        sql: params.sql,
-                        params: params.params,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.d1.database.raw(
+                        params.database_id,
+                        {
+                            account_id: accountId,
+                            sql: params.sql,
+                            params: params.params,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({

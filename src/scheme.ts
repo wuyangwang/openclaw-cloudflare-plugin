@@ -35,7 +35,8 @@ export function cloudflarePluginConfigSchema(): OpenClawPluginConfigSchema {
                 },
                 accountId: {
                     type: 'string',
-                    description: 'Cloudflare Account ID (optional, will be auto-detected if omitted)',
+                    description:
+                        'Cloudflare Account ID (optional, will be auto-detected if omitted)',
                 },
             },
             required: ['apiToken'],

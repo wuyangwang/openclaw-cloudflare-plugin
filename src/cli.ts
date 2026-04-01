@@ -45,7 +45,9 @@ export function registerCloudflareCli(
                         [PLUGIN_NAME]: {
                             enabled: true,
                             config: {
-                                ...(currentConfig.plugins?.entries?.[PLUGIN_NAME]?.config || {}),
+                                ...(currentConfig.plugins?.entries?.[
+                                    PLUGIN_NAME
+                                ]?.config || {}),
                                 apiToken: token.trim(),
                                 accountId: probe.accountId?.trim() || undefined,
                             },

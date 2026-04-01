@@ -20,9 +20,6 @@ export async function getClientAndAccount(api: OpenClawPluginApi) {
     }
 
     const client = getCloudflareClient(apiToken);
-    const accountId = await getOrResolveAccountId(
-        client,
-        configuredAccountId,
-    );
+    const accountId = await getOrResolveAccountId(client, configuredAccountId);
     return { client, accountId };
 }

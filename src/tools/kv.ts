@@ -52,9 +52,17 @@ const PutKvValueSchema = Type.Object({
     namespace_id: Type.String({ description: 'Cloudflare KV Namespace ID' }),
     key: Type.String({ description: 'Key name' }),
     value: Type.String({ description: 'The value to store' }),
-    expiration: Type.Optional(Type.Number({ description: 'Expiration time in seconds since epoch' })),
-    expiration_ttl: Type.Optional(Type.Number({ description: 'Time to live in seconds' })),
-    metadata: Type.Optional(Type.String({ description: 'Metadata to store with the value (JSON string)' })),
+    expiration: Type.Optional(
+        Type.Number({ description: 'Expiration time in seconds since epoch' }),
+    ),
+    expiration_ttl: Type.Optional(
+        Type.Number({ description: 'Time to live in seconds' }),
+    ),
+    metadata: Type.Optional(
+        Type.String({
+            description: 'Metadata to store with the value (JSON string)',
+        }),
+    ),
 });
 
 const DeleteKvKeySchema = Type.Object({
@@ -75,7 +83,8 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
             parameters: ListKvNamespacesSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.kv.namespaces.list({
                         account_id: accountId,
                         page: params.page,
@@ -101,7 +110,8 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
             parameters: CreateKvNamespaceSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.kv.namespaces.create({
                         account_id: accountId,
                         name: params.name,
@@ -126,10 +136,14 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
             parameters: DeleteKvNamespaceSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.kv.namespaces.delete(params.namespace_id, {
-                        account_id: accountId,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.kv.namespaces.delete(
+                        params.namespace_id,
+                        {
+                            account_id: accountId,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({
@@ -150,7 +164,8 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
             parameters: ListKvKeysSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.kv.namespaces.keys.list(
                         params.namespace_id,
                         {
@@ -181,7 +196,8 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
             parameters: GetKvValueSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const res = await client.kv.namespaces.values.get(
                         params.namespace_id,
                         params.key,
@@ -214,8 +230,11 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
             parameters: PutKvValueSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const metadata = params.metadata ? JSON.parse(params.metadata) : undefined;
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const metadata = params.metadata
+                        ? JSON.parse(params.metadata)
+                        : undefined;
                     const result = await client.kv.namespaces.values.update(
                         params.namespace_id,
                         params.key,
@@ -225,7 +244,7 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
                             expiration: params.expiration,
                             expiration_ttl: params.expiration_ttl,
                             metadata,
-                        }
+                        },
                     );
                     return json(result);
                 } catch (err) {
@@ -247,13 +266,14 @@ export function registerCloudflareKvTools(api: OpenClawPluginApi) {
             parameters: DeleteKvKeySchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.kv.namespaces.values.delete(
                         params.namespace_id,
                         params.key,
                         {
                             account_id: accountId,
-                        }
+                        },
                     );
                     return json(result);
                 } catch (err) {

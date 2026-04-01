@@ -17,9 +17,20 @@ const plugin = {
         registerCloudflareR2Tools(api);
 
         // Register CLI commands for management
-        api.registerCli(({ program }: any) => {
-            registerCloudflareCli(api, program);
-        });
+        api.registerCli(
+            ({ program }: any) => {
+                registerCloudflareCli(api, program);
+            },
+            {
+                descriptors: [
+                    {
+                        name: 'cloudflare',
+                        description: 'Cloudflare plugin management',
+                        hasSubcommands: true,
+                    },
+                ],
+            },
+        );
     },
 };
 

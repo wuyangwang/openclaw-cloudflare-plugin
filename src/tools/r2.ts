@@ -5,11 +5,21 @@ import { getClientAndAccount, json } from './utils.js';
 // ============ Schemas ============
 
 const ListR2BucketsSchema = Type.Object({
-    name_contains: Type.Optional(Type.String({ description: 'Filter by name containing string' })),
-    start_after: Type.Optional(Type.String({ description: 'Pagination cursor' })),
-    per_page: Type.Optional(Type.Number({ description: 'Items per page', default: 10 })),
-    order: Type.Optional(Type.String({ description: 'Order by field', enum: ['name'] })),
-    direction: Type.Optional(Type.String({ description: 'Sort direction', enum: ['asc', 'desc'] })),
+    name_contains: Type.Optional(
+        Type.String({ description: 'Filter by name containing string' }),
+    ),
+    start_after: Type.Optional(
+        Type.String({ description: 'Pagination cursor' }),
+    ),
+    per_page: Type.Optional(
+        Type.Number({ description: 'Items per page', default: 10 }),
+    ),
+    order: Type.Optional(
+        Type.String({ description: 'Order by field', enum: ['name'] }),
+    ),
+    direction: Type.Optional(
+        Type.String({ description: 'Sort direction', enum: ['asc', 'desc'] }),
+    ),
 });
 
 const CreateR2BucketSchema = Type.Object({
@@ -36,7 +46,8 @@ export function registerCloudflareR2Tools(api: OpenClawPluginApi) {
             parameters: ListR2BucketsSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.r2.buckets.list({
                         account_id: accountId,
                         name_contains: params.name_contains,
@@ -65,7 +76,8 @@ export function registerCloudflareR2Tools(api: OpenClawPluginApi) {
             parameters: CreateR2BucketSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.r2.buckets.create({
                         account_id: accountId,
                         name: params.name,
@@ -90,10 +102,14 @@ export function registerCloudflareR2Tools(api: OpenClawPluginApi) {
             parameters: GetR2BucketSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.r2.buckets.get(params.bucket_name, {
-                        account_id: accountId,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.r2.buckets.get(
+                        params.bucket_name,
+                        {
+                            account_id: accountId,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({
@@ -114,10 +130,14 @@ export function registerCloudflareR2Tools(api: OpenClawPluginApi) {
             parameters: DeleteR2BucketSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.r2.buckets.delete(params.bucket_name, {
-                        account_id: accountId,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.r2.buckets.delete(
+                        params.bucket_name,
+                        {
+                            account_id: accountId,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({

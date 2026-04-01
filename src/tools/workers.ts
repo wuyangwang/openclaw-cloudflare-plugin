@@ -6,7 +6,9 @@ import { getClientAndAccount, json } from './utils.js';
 
 const ListWorkersSchema = Type.Object({
     page: Type.Optional(Type.Number({ description: 'Page number' })),
-    per_page: Type.Optional(Type.Number({ description: 'Number of workers per page' })),
+    per_page: Type.Optional(
+        Type.Number({ description: 'Number of workers per page' }),
+    ),
 });
 
 const WorkerIdSchema = Type.Object({
@@ -15,7 +17,11 @@ const WorkerIdSchema = Type.Object({
 
 const CreateWorkerSchema = Type.Object({
     name: Type.String({ description: 'The name of the Worker' }),
-    params: Type.Optional(Type.Any({ description: 'Additional parameters for creating the worker' })),
+    params: Type.Optional(
+        Type.Any({
+            description: 'Additional parameters for creating the worker',
+        }),
+    ),
 });
 
 const UpdateWorkerSchema = Type.Object({
@@ -40,7 +46,8 @@ export function registerCloudflareWorkersTools(api: OpenClawPluginApi) {
             parameters: ListWorkersSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.workers.beta.workers.list({
                         account_id: accountId,
                         ...params,
@@ -65,10 +72,14 @@ export function registerCloudflareWorkersTools(api: OpenClawPluginApi) {
             parameters: WorkerIdSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.workers.beta.workers.get(params.worker_id, {
-                        account_id: accountId,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.workers.beta.workers.get(
+                        params.worker_id,
+                        {
+                            account_id: accountId,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({
@@ -89,7 +100,8 @@ export function registerCloudflareWorkersTools(api: OpenClawPluginApi) {
             parameters: CreateWorkerSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
                     const result = await client.workers.beta.workers.create({
                         account_id: accountId,
                         name: params.name,
@@ -115,11 +127,15 @@ export function registerCloudflareWorkersTools(api: OpenClawPluginApi) {
             parameters: UpdateWorkerSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.workers.beta.workers.update(params.worker_id, {
-                        account_id: accountId,
-                        ...params.params,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.workers.beta.workers.update(
+                        params.worker_id,
+                        {
+                            account_id: accountId,
+                            ...params.params,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({
@@ -140,11 +156,15 @@ export function registerCloudflareWorkersTools(api: OpenClawPluginApi) {
             parameters: EditWorkerSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.workers.beta.workers.edit(params.worker_id, {
-                        account_id: accountId,
-                        ...params.params,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.workers.beta.workers.edit(
+                        params.worker_id,
+                        {
+                            account_id: accountId,
+                            ...params.params,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({
@@ -165,10 +185,14 @@ export function registerCloudflareWorkersTools(api: OpenClawPluginApi) {
             parameters: WorkerIdSchema,
             async execute(_toolCallId, params: any) {
                 try {
-                    const { client, accountId } = await getClientAndAccount(api);
-                    const result = await client.workers.beta.workers.delete(params.worker_id, {
-                        account_id: accountId,
-                    });
+                    const { client, accountId } =
+                        await getClientAndAccount(api);
+                    const result = await client.workers.beta.workers.delete(
+                        params.worker_id,
+                        {
+                            account_id: accountId,
+                        },
+                    );
                     return json(result);
                 } catch (err) {
                     return json({
